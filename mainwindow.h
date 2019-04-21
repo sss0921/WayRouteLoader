@@ -20,9 +20,11 @@ private:
     void onSaveActionTriggered();
     void onSaveAsActionTriggered();
     void doOpenFile(const QString &filePath);
+    void doSaveFile(const QString &filePath);
 
     Ui::MainWindow *ui;
     QString m_planPath;
+    QString m_filePath;
 };
 
 #endif // MAINWINDOW_H
