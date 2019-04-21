@@ -28,12 +28,14 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     simpleitem.cpp \
-    visualitem.cpp
+    visualitem.cpp \
+    missionitem.cpp
 
 HEADERS += \
         mainwindow.h \
     simpleitem.h \
-    visualitem.h
+    visualitem.h \
+    missionitem.h
 
 FORMS += \
         mainwindow.ui
