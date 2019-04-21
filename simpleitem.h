@@ -1,11 +1,13 @@
 #ifndef SIMPLEITEM_H
 #define SIMPLEITEM_H
 
+#include "visualitem.h"
+
 #include <QObject>
 #include <QScopedPointer>
 
 class SimpleItemPrivate;
-class SimpleItem : public QObject
+class SimpleItem : public VisualItem
 {
     Q_OBJECT
 public:

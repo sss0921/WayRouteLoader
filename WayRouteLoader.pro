@@ -27,11 +27,13 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    simpleitem.cpp
+    simpleitem.cpp \
+    visualitem.cpp
 
 HEADERS += \
         mainwindow.h \
-    simpleitem.h
+    simpleitem.h \
+    visualitem.h
 
 FORMS += \
         mainwindow.ui

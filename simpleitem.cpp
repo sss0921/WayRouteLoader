@@ -37,7 +37,7 @@ public:
 };
 
 SimpleItem::SimpleItem(QObject *parent)
-    : QObject(parent)
+    : VisualItem(parent)
     , d(new SimpleItemPrivate)
 {
 }
