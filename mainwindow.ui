@@ -6,20 +6,37 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>308</width>
+    <width>350</width>
     <height>794</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
-  <widget class="QWidget" name="centralWidget"/>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <widget class="QTreeWidget" name="treeWidget">
+      <column>
+       <property name="text">
+        <string>Name</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Value</string>
+       </property>
+      </column>
+     </widget>
+    </item>
+   </layout>
+  </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>308</width>
+     <width>350</width>
      <height>22</height>
     </rect>
    </property>
@@ -31,7 +48,15 @@
     <addaction name="actionSave"/>
     <addaction name="actionSaveAs"/>
    </widget>
+   <widget class="QMenu" name="menuMission">
+    <property name="title">
+     <string>Mission</string>
+    </property>
+    <addaction name="actionSimple"/>
+    <addaction name="actionSurvey"/>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuMission"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -55,6 +80,16 @@
   <action name="actionSaveAs">
    <property name="text">
     <string>Save As</string>
+   </property>
+  </action>
+  <action name="actionSimple">
+   <property name="text">
+    <string>Simple</string>
+   </property>
+  </action>
+  <action name="actionSurvey">
+   <property name="text">
+    <string>Survey</string>
    </property>
   </action>
  </widget>

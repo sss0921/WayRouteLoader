@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui positioning
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -29,16 +29,21 @@ SOURCES += \
         mainwindow.cpp \
     simpleitem.cpp \
     visualitem.cpp \
-    missionitem.cpp
+    missionitem.cpp \
+    simpleitemloader.cpp \
+    surveyitem.cpp
 
 HEADERS += \
         mainwindow.h \
     simpleitem.h \
     visualitem.h \
-    missionitem.h
+    missionitem.h \
+    simpleitemloader.h \
+    surveyitem.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+    simpleitemloader.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

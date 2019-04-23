@@ -1,5 +1,9 @@
 #include "simpleitem.h"
 
+#include <QLoggingCategory>
+
+Q_LOGGING_CATEGORY(simpleItem, "WayRouteLoader.SimpleItem")
+
 class SimpleItemPrivate
 {
 public:
@@ -15,7 +19,7 @@ public:
     {
     }
     SimpleItemPrivate(const QString &type, int sequence, double longitude, double latitude,
-                      int altitude, double speed, int radius)
+                      int altitude, double speed, int radius, unsigned char flag)
         : type(type)
         , sequence(sequence)
         , longitude(longitude)
@@ -23,6 +27,7 @@ public:
         , altitude(altitude)
         , speed(speed)
         , radius(radius)
+        , flag(flag)
     {
     }
     ~SimpleItemPrivate() {}
@@ -40,10 +45,12 @@ SimpleItem::SimpleItem(QObject *parent)
     : VisualItem(parent)
     , d(new SimpleItemPrivate)
 {
+    qCWarning(simpleItem) << "SimpleItem";
 }
 
 SimpleItem::~SimpleItem()
 {
+    qCWarning(simpleItem) << "~SimpleItem";
 }
 
 QString SimpleItem::type() const

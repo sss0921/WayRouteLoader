@@ -8,6 +8,7 @@ class VisualItem : public QObject
     Q_OBJECT
 public:
     explicit VisualItem(QObject *parent = nullptr);
+    ~VisualItem();
 
     virtual QString type() const = 0;
     virtual int sequence() const = 0;
