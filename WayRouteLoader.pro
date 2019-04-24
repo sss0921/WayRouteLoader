@@ -31,7 +31,8 @@ SOURCES += \
     visualitem.cpp \
     missionitem.cpp \
     simpleitemloader.cpp \
-    surveyitem.cpp
+    surveyitem.cpp \
+    surveyitemloader.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -39,11 +40,13 @@ HEADERS += \
     visualitem.h \
     missionitem.h \
     simpleitemloader.h \
-    surveyitem.h
+    surveyitem.h \
+    surveyitemloader.h
 
 FORMS += \
         mainwindow.ui \
-    simpleitemloader.ui
+    simpleitemloader.ui \
+    surveyitemloader.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

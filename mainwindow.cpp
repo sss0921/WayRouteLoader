@@ -12,6 +12,7 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
     , m_simpleItemLoader(new SimpleItemLoader(this))
+    , m_surveyItemLoader(new SurveyItemLoader(this))
     , m_missionItem(new MissionItem(this))
 {
     ui->setupUi(this);
@@ -98,6 +99,14 @@ void MainWindow::onSimpleActionTriggered()
 void MainWindow::onSurveyActionTriggered()
 {
     qCWarning(mainwindow) << "onSurveyActionTriggered";
+    if (m_surveyItemLoader->exec() == QDialog::Accepted) {
+        qCWarning(mainwindow) << "Accepted";
+        SurveyItem *item = m_surveyItemLoader->surveyItem();
+        m_data.append(item);
+        appendData(item);
+    } else {
+        qCWarning(mainwindow) << "Rejected";
+    }
 }
 
 void MainWindow::doOpenFile(const QString &filePath)

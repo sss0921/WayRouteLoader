@@ -4,6 +4,7 @@
 #include "visualitem.h"
 #include "missionitem.h"
 #include "simpleitemloader.h"
+#include "surveyitemloader.h"
 
 #include <QMainWindow>
 
@@ -36,6 +37,7 @@ private:
     QString m_filePath;
 
     SimpleItemLoader *m_simpleItemLoader;
+    SurveyItemLoader *m_surveyItemLoader;
     MissionItem *m_missionItem;
     QVector<VisualItem *> m_data;
 };
