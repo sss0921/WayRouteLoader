@@ -29,7 +29,7 @@ public:
     int sideOverlap;
     bool valueSetIsDistance;
 
-    QVector<QGeoCoordinate> items;
+    QVector<SimpleItem *> items;
 };
 
 SurveyItemPrivate::SurveyItemPrivate()
@@ -50,7 +50,7 @@ SurveyItemPrivate::SurveyItemPrivate()
     , sensorHeight(0.0)
     , sideOverlap(0)
     , valueSetIsDistance(false)
-    , items(QVector<QGeoCoordinate>())
+    , items(QVector<SimpleItem *>())
 {
 }
 
@@ -344,13 +344,20 @@ void SurveyItem::setValueSetIsDistance(bool valueSetIsDistance)
     d->valueSetIsDistance = valueSetIsDistance;
 }
 
-QVector<QGeoCoordinate> SurveyItem::items() const
+QVector<SimpleItem *> SurveyItem::items() const
 {
     qCWarning(surveyItem) << "items";
     return d->items;
 }
-void SurveyItem::setItems(const QVector<QGeoCoordinate> &item)
+
+void SurveyItem::setItems(const QVector<SimpleItem *> &item)
 {
     qCWarning(surveyItem) << "setItems";
     d->items = item;
+}
+
+void SurveyItem::appendItem(SimpleItem *item)
+{
+    qCWarning(surveyItem) << "appendItem";
+    d->items.append(item);
 }

@@ -1,9 +1,9 @@
 #ifndef SURVEYITEM_H
 #define SURVEYITEM_H
 
+#include "simpleitem.h"
 #include "visualitem.h"
 
-#include <QGeoCoordinate>
 #include <QScopedPointer>
 
 class SurveyItemPrivate;
@@ -68,8 +68,10 @@ public:
     bool valueSetIsDistance() const;
     void setValueSetIsDistance(bool valueSetIsDistance);
 
-    QVector<QGeoCoordinate> items() const;
-    void setItems(const QVector<QGeoCoordinate> &item);
+    QVector<SimpleItem *> items() const;
+    void setItems(const QVector<SimpleItem *> &item);
+
+    void appendItem(SimpleItem *item);
 
 private:
     QScopedPointer<SurveyItemPrivate> d;
