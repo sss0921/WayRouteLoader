@@ -35,8 +35,16 @@ MainWindow::~MainWindow()
 {
     delete ui;
 
-    for (auto it = m_data.begin(); it != m_data.end(); it++)
+    for (auto it = m_data.begin(); it != m_data.end(); it++) {
+        if ((*it)->type() != QString("SimpleItem")) {
+            SurveyItem *item = qobject_cast<SurveyItem *>(*it);
+            auto lists = item->items();
+            for (auto iit = lists.begin(); iit != lists.end(); iit++)
+                delete *iit;
+        }
+
         delete *it;
+    }
 
     m_data.clear();
 }
@@ -131,6 +139,9 @@ void MainWindow::appendData(VisualItem *item)
     if (item->type() == QString("SimpleItem")) {
         SimpleItem *simpleItem = qobject_cast<SimpleItem *>(item);
         appendSimpleItemData(simpleItem);
+    } else {
+        SurveyItem *surveyItem = qobject_cast<SurveyItem *>(item);
+        appendSurveyItemData(surveyItem);
     }
 }
 
@@ -164,4 +175,46 @@ void MainWindow::appendSimpleItemData(SimpleItem *item)
     QTreeWidgetItem *flagItem = new QTreeWidgetItem(sequenceItem);
     flagItem->setText(0, "Flag:");
     flagItem->setText(1, QString::number(item->flag(), 16));
+}
+
+void MainWindow::appendSurveyItemData(SurveyItem *item)
+{
+    // sequence
+    QTreeWidgetItem *sequenceItem = new QTreeWidgetItem(ui->treeWidget);
+    sequenceItem->setText(0, "Sequence:");
+    sequenceItem->setText(1, QString::number(item->sequence()));
+    // camera Nama
+    QTreeWidgetItem *cameraNameItem = new QTreeWidgetItem(sequenceItem);
+    cameraNameItem->setText(0, "CameraName:");
+    cameraNameItem->setText(1, item->cameraName());
+    // items data
+    QTreeWidgetItem *dataItem = new QTreeWidgetItem(sequenceItem);
+    dataItem->setText(0, "Data Num:");
+    dataItem->setText(1, QString::number(item->items().size()));
+
+    SimpleItem *simpleItem = item->items().first();
+    // longitude
+    QTreeWidgetItem *longitudeItem = new QTreeWidgetItem(dataItem);
+    longitudeItem->setText(0, "Longitude:");
+    longitudeItem->setText(1, QString::number(simpleItem->longitude(), 'f', 6));
+    // latitude
+    QTreeWidgetItem *latitudeItem = new QTreeWidgetItem(dataItem);
+    latitudeItem->setText(0, "Latitude:");
+    latitudeItem->setText(1, QString::number(simpleItem->latitude(), 'f', 6));
+    // altitude
+    QTreeWidgetItem *altitudeItem = new QTreeWidgetItem(dataItem);
+    altitudeItem->setText(0, "Altitude:");
+    altitudeItem->setText(1, QString::number(simpleItem->altitude()));
+    // speed
+    QTreeWidgetItem *speedItem = new QTreeWidgetItem(dataItem);
+    speedItem->setText(0, "Speed:");
+    speedItem->setText(1, QString::number(simpleItem->speed(), 'f', 1));
+    // raiuds
+    QTreeWidgetItem *radiusItem = new QTreeWidgetItem(dataItem);
+    radiusItem->setText(0, "Radius:");
+    radiusItem->setText(1, QString::number(simpleItem->radius()));
+    // flag
+    QTreeWidgetItem *flagItem = new QTreeWidgetItem(dataItem);
+    flagItem->setText(0, "Flag:");
+    flagItem->setText(1, QString::number(simpleItem->flag(), 16));
 }

@@ -3,6 +3,7 @@
 
 #include "visualitem.h"
 #include "simpleitem.h"
+#include "surveyitem.h"
 
 #include <QObject>
 #include <QScopedPointer>

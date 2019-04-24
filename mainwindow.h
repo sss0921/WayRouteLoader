@@ -31,6 +31,7 @@ private:
     void doOpenFile(const QString &filePath);
     void doSaveFile(const QString &filePath);
     void appendSimpleItemData(SimpleItem *item);
+    void appendSurveyItemData(SurveyItem *item);
 
     Ui::MainWindow *ui;
     QString m_planPath;

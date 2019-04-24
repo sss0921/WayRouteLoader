@@ -21,6 +21,7 @@ public:
     void setSurveyItem(SurveyItem *item);
 
 private:
+    void onAcceptedActionTriggered();
     void updateData();
     void setData();
 

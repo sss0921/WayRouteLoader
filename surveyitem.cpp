@@ -60,6 +60,7 @@ SurveyItemPrivate::~SurveyItemPrivate()
 
 SurveyItem::SurveyItem(QObject *parent)
     : VisualItem(parent)
+    , d(new SurveyItemPrivate)
 {
     qCWarning(surveyItem) << "SurveyItem";
 }

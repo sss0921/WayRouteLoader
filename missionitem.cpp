@@ -86,6 +86,32 @@ void MissionItemPrivate::saveToSimpleItem(QJsonObject &object, VisualItem *item)
 
 void MissionItemPrivate::saveToSurveyItem(QJsonObject &object, VisualItem *item)
 {
+    SurveyItem *surveyItem = qobject_cast<SurveyItem *>(item);
+    object["type"] = "Survey";
+    object["sequence"] = item->sequence();
+
+    QJsonObject cameraObject;
+    cameraObject["CameraName:"] = surveyItem->cameraName();
+    cameraObject["ImageWidth:"] = surveyItem->imageWidth();
+    cameraObject["ImageHeight:"] = surveyItem->imageHeight();
+    cameraObject["ImageDensity"] = surveyItem->imageDensity();
+
+    QJsonArray itemArray;
+    auto lists = surveyItem->items();
+
+    for (auto it = lists.begin(); it != lists.end(); it++) {
+        QJsonArray paramsArray;
+        paramsArray.append((*it)->longitude());
+        paramsArray.append((*it)->latitude());
+        paramsArray.append((*it)->altitude());
+        paramsArray.append((*it)->speed());
+        paramsArray.append((*it)->radius());
+        paramsArray.append((*it)->flag());
+        itemArray.append(paramsArray);
+    }
+
+    object["Camera"] = cameraObject;
+    object["Items"] = itemArray;
 }
 
 MissionItem::MissionItem(QObject *parent)

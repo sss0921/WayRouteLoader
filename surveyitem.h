@@ -9,6 +9,7 @@
 class SurveyItemPrivate;
 class SurveyItem : public VisualItem
 {
+    Q_OBJECT
 public:
     explicit SurveyItem(QObject *parent = nullptr);
     ~SurveyItem();
