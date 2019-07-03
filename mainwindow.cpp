@@ -118,6 +118,22 @@ void MainWindow::doOpenFile(const QString &filePath)
 {
     qCWarning(mainwindow) << "doOpenFile";
     qCWarning(mainwindow) << QString("filePath: %1").arg(filePath);
+
+    m_missionItem->clearItemsData();
+    if (m_missionItem->load(filePath))
+        QMessageBox::information(this, tr("Info"), tr("Load camera file success!"));
+    else
+        return;
+
+    clearData();
+    m_data = m_missionItem->itemsData();
+    for (auto it = m_data.begin(); it != m_data.end(); it++) {
+        QString type = (*it)->type();
+        if (type == QString("SimpleItem"))
+            appendSimpleItemData(static_cast<SimpleItem *>(*it));
+        else
+            appendSurveyItemData(static_cast<SurveyItem *>(*it));
+    }
 }
 
 void MainWindow::doSaveFile(const QString &filePath)
@@ -125,6 +141,7 @@ void MainWindow::doSaveFile(const QString &filePath)
     qCWarning(mainwindow) << "doSaveFile";
     qCWarning(mainwindow) << QString("filePath: %1").arg(filePath);
 
+    m_missionItem->clearItemsData();
     m_missionItem->setItemsData(m_data);
     if (m_missionItem->save(filePath))
         QMessageBox::information(this, tr("Info"), tr("Save camera file success!"));
