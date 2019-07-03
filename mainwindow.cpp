@@ -22,6 +22,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->actionSaveAs, &QAction::triggered, this, &MainWindow::onSaveAsActionTriggered);
     connect(ui->actionSimple, &QAction::triggered, this, &MainWindow::onSimpleActionTriggered);
     connect(ui->actionSurvey, &QAction::triggered, this, &MainWindow::onSurveyActionTriggered);
+    connect(ui->clearPushButton, &QPushButton::clicked, this,
+            &MainWindow::onClearPushButtonClicked);
 
     QString dirPath = qApp->applicationDirPath();
     m_planPath = dirPath + "/" + "Plan";
@@ -34,19 +36,7 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
-
-    for (auto it = m_data.begin(); it != m_data.end(); it++) {
-        if ((*it)->type() != QString("SimpleItem")) {
-            SurveyItem *item = qobject_cast<SurveyItem *>(*it);
-            auto lists = item->items();
-            for (auto iit = lists.begin(); iit != lists.end(); iit++)
-                delete *iit;
-        }
-
-        delete *it;
-    }
-
-    m_data.clear();
+    clearData();
 }
 
 void MainWindow::onOpenActionTriggered()
@@ -115,6 +105,13 @@ void MainWindow::onSurveyActionTriggered()
     } else {
         qCWarning(mainwindow) << "Rejected";
     }
+}
+
+void MainWindow::onClearPushButtonClicked()
+{
+    qCWarning(mainwindow) << "onClearPushButtonClicked";
+    ui->treeWidget->clear();
+    clearData();
 }
 
 void MainWindow::doOpenFile(const QString &filePath)
@@ -217,4 +214,20 @@ void MainWindow::appendSurveyItemData(SurveyItem *item)
     QTreeWidgetItem *flagItem = new QTreeWidgetItem(dataItem);
     flagItem->setText(0, "Flag:");
     flagItem->setText(1, QString::number(simpleItem->flag(), 16));
+}
+
+void MainWindow::clearData()
+{
+    for (auto it = m_data.begin(); it != m_data.end(); it++) {
+        if ((*it)->type() != QString("SimpleItem")) {
+            SurveyItem *item = qobject_cast<SurveyItem *>(*it);
+            auto lists = item->items();
+            for (auto iit = lists.begin(); iit != lists.end(); iit++)
+                delete *iit;
+        }
+
+        delete *it;
+    }
+
+    m_data.clear();
 }
