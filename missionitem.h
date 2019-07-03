@@ -18,8 +18,9 @@ public:
     explicit MissionItem(QObject *parent = nullptr);
     ~MissionItem();
 
+    void clearItemsData();
     QVector<VisualItem *> itemsData() const;
-    void setItemsData(const QVector<VisualItem *> data);
+    void setItemsData(const QVector<VisualItem *> &data);
 
     bool save(const QString &filePath, FileFormat format = TextFileFormat) const;
     bool load(const QString &filePath) const;
